@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="SpaceParticle" type="CPUParticles2D"]
+position = Vector2( 518.727, 288.669 )
+amount = 16
+emission_shape = 2
+emission_rect_extents = Vector2( 400, 400 )
+spread = 90.0
+gravity = Vector2( 0, 0 )
+orbit_velocity = 0.1
+orbit_velocity_random = 1.0
+scale_amount = 2.0
+scale_amount_random = 1.0
+__meta__ = {
+"_edit_lock_": true
+}

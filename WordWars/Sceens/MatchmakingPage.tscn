@@ -1,0 +1,174 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Themes/main_ui.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/MatchmakingPage.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/ModernDOS9x16.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+resource_local_to_scene = true
+size = 64
+extra_spacing_char = 1
+font_data = ExtResource( 3 )
+
+[node name="MatchmakingPage" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -75.0
+margin_right = 108.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="play" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -60.0
+margin_right = 108.0
+margin_bottom = -15.0
+text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vswho" type="LineEdit" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = 10.0
+margin_right = 108.0
+margin_bottom = 55.0
+align = 1
+editable = false
+placeholder_text = "RANDOM"
+placeholder_alpha = 0.7
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Label" type="Label" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.0
+margin_top = -32.0
+margin_right = 37.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_constants/shadow_as_outline = 20
+text = "VS"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupMsg" type="Popup" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PopupMsg"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupMsg/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PopupMsg/Panel/MarginContainer"]
+margin_right = 320.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Here we write magic text"
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="accept_button" type="Button" parent="PopupMsg/Panel"]
+margin_left = 111.0
+margin_top = 216.0
+margin_right = 284.0
+margin_bottom = 277.0
+text = "ACCEPT: 10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="matchmaking_labele" type="Label" parent="."]
+margin_left = 69.0
+margin_top = 51.0
+margin_right = 353.0
+margin_bottom = 111.0
+text = "ATM PLAYER CONNECTED: 52"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="Control/play" to="." method="_on_play_button_up"]
+[connection signal="popup_hide" from="PopupMsg" to="." method="_on_PopupMsg_popup_hide"]
+[connection signal="button_up" from="PopupMsg/Panel/accept_button" to="." method="_on_accept_button_button_up"]

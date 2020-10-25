@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Fonts/MDOS.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Art/Lock.png" type="Texture" id=2]
+[ext_resource path="res://Shaders/pixleize.shader" type="Shader" id=3]
+[ext_resource path="res://SFX/rspawn.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -0.0634221, 0, 0, Vector2( 0.948276, 0.115909 ), -1.84545, 0.0, 0, 0 ]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/pixelSize = 1.0
+
+[sub_resource type="Animation" id=3]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Rocket" type="Node2D"]
+position = Vector2( 1339.36, 474.12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RocketParticle" type="CPUParticles2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+preprocess = 1.0
+speed_scale = 0.5
+scale_amount = 12.0
+scale_amount_curve = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+material = SubResource( 2 )
+margin_left = 9.483
+margin_top = -8.0
+margin_right = 111.483
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 1 )
+text = "INCOMING"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DriveAnim" type="AnimationPlayer" parent="."]
+autoplay = "rotate"
+playback_speed = 0.25
+anims/rotate = SubResource( 3 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -24.0

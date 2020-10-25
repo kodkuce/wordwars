@@ -1,0 +1,157 @@
+POST https://example.com/comments HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+
+
+
+
+
+
+
+#REG
+### Empty json
+POST https://nooooo.duckdns.org/grammergame/reg/ HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+### Missing parameter
+POST https://nooooo.duckdns.org/grammergame/reg/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "",
+    "email": "",
+    "password": "lozinka.1"
+}
+
+### Validation test
+POST https://nooooo.duckdns.org/grammergame/reg/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "aaaaaaaaa",
+    "email": "aaaa",
+    "password": "????"
+}
+
+### Legit test
+POST https://nooooo.duckdns.org/grammergame/reg/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tester",
+    "email": "zaposao@mail.com",
+    "password": "lozinka.1"
+}
+
+
+
+### resend mail
+POST https://nooooo.duckdns.org/grammergame/resendemail/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "kodkuce@mail.ru"
+}
+
+#AUTH
+### Empty json
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+### Missing parameter
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "xxxx@xmail.xx"
+}
+
+### Validation test wrong email password
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "zzzi@mail.com",
+    "password": "1234567891"
+}
+
+### Validation test wrong username password
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "zzzimailcom",
+    "password": "1234567891"
+}
+
+### Validation test
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "zzzimailcom",
+    "password": "1234567891"
+}
+
+### Legit test
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "kodkuce@mail.ru",
+    "password": "lozinka.1"
+}
+
+### Legit test with username insted email
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "kodkuce",
+    "password": "lozinka.1"
+}
+
+###
+POST https://nooooo.duckdns.org/grammergame/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "zaposao@mail.com",
+    "password": "lozinka.1"
+}
+
+
+#MATCHMAKING
+###establish connection token
+GET https://nooooo.duckdns.org/grammergame/play/ HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29yZSI6IjAiLCJpZCI6IjYiLCJleHAiOjE1OTY1NTA2MDMsIm5pY2siOiJrb2RrdWNlIn0.L6gFM1_aNaH3BgZOcLTFzqGcoF6Y9C2582FVjr8oiww
+
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29yZSI6IjAiLCJpZCI6IjciLCJleHAiOjE1OTY1NTYwNjMsIm5pY2siOiJwb3NhbyJ9.z9A_hsngr9LYsU48vG8jqzuEQ5IiT8G9-5_pd_79RKw
+
+###expired connection token
+GET https://nooooo.duckdns.org/grammergame/play/ HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29yZSI6IjAiLCJpZCI6IjYiLCJleHAiOjExMTExMTExMTEsIm5pY2siOiJrb2RrdWNlIn0.zmCgJU3Ql2Hin5NUFHivB7vifeKseKso2hR7V9_1APg
+
+###invalid autorization header
+GET https://nooooo.duckdns.org/grammergame/play/ HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1Nsdasdasdasd.dsadasdasdasdas.dsadadasdasdasdwa
+
+###empty autorization header
+GET https://nooooo.duckdns.org/grammergame/play/ HTTP/1.1
+Authorization:
+
+###missing autorization header
+GET https://nooooo.duckdns.org/grammergame/play/ HTTP/1.1

@@ -1,0 +1,150 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Themes/main_ui.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/RegisterPage.gd" type="Script" id=2]
+
+[node name="RegisterPage" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="reg" type="HTTPRequest" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -135.0
+margin_right = 100.0
+margin_bottom = 135.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 200.0
+margin_bottom = 270.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 200, 25 )
+text = "Register page:"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="email" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+margin_top = 29.0
+margin_right = 200.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 45 )
+align = 1
+placeholder_text = "email"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="username" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 200.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 0, 45 )
+align = 1
+placeholder_text = "username"
+
+[node name="password" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+margin_top = 127.0
+margin_right = 200.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 0, 45 )
+align = 1
+secret = true
+placeholder_text = "password"
+
+[node name="password_validator" type="LineEdit" parent="CenterContainer/VBoxContainer"]
+margin_top = 176.0
+margin_right = 200.0
+margin_bottom = 221.0
+rect_min_size = Vector2( 0, 45 )
+align = 1
+secret = true
+placeholder_text = "repeat password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="register" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 225.0
+margin_right = 200.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 0, 45 )
+text = "TRY REGISTER"
+
+[node name="PopupMsg" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PopupMsg"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 400, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupMsg/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PopupMsg/Panel/MarginContainer"]
+margin_right = 320.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Here we write magic text"
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="request_completed" from="reg" to="." method="_on_reg_request_completed"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/register" to="." method="_on_register_button_up"]
+[connection signal="popup_hide" from="PopupMsg" to="." method="_on_PopupMsg_popup_hide"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgloopOGG-8bit.ogg-72d21176e46ab2a52f70efe354879ff1.oggstr"
+
+[deps]
+
+source_file="res://SFX/bgloopOGG-8bit.ogg"
+dest_files=[ "res://.import/bgloopOGG-8bit.ogg-72d21176e46ab2a52f70efe354879ff1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.2

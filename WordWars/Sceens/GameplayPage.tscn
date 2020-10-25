@@ -1,0 +1,741 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Themes/main_ui.tres" type="Theme" id=1]
+[ext_resource path="res://Art/Spaceship.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/MDOSmedium.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Fonts/ModernDOS9x16.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Art/Lock.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/GameplayPage.gd" type="Script" id=6]
+[ext_resource path="res://Shaders/displace.shader" type="Shader" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "uiAnim"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("player_ui:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -200, 360 ), Vector2( -200, 360 ), Vector2( 20, 360 ), Vector2( 0, 360 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("enemy_ui:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 900, 0 ), Vector2( 900, 0 ), Vector2( 690, 0 ), Vector2( 706, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player_input_ui:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -45.0, -45.0, 5.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("score_ui:rect_rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.5, 2.3, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 90.0, -4.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TurtorialScreen:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 2.6, 3.1, 5.5, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, -0.0634221, 0, 0, Vector2( 0.948276, 0.115909 ), -1.84545, 0.0, 0, 0 ]
+
+[sub_resource type="DynamicFont" id=3]
+resource_local_to_scene = true
+size = 18
+extra_spacing_char = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "rotate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "rotate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("top_spaceship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 2.92817, 0.0490364 ),
+"update": 0,
+"values": [ Vector2( 512, -100 ), Vector2( 512, 65 ), Vector2( 512, 60 ) ]
+}
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.231788, 0.97351 )
+colors = PoolColorArray( 0.302734, 0.302734, 0.302734, 1, 0.139648, 0.139648, 0.139648, 1, 1, 1, 1, 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 7 )
+shader_param/center = Vector2( 0.6, 0.1 )
+shader_param/force = 0.02
+shader_param/size = 2.0
+shader_param/thickness = 0.0
+shader_param/offset = 0.0
+
+[sub_resource type="Animation" id=9]
+resource_name = "exp_shader"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:material:shader_param/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:material:shader_param/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.5, 0.238064, 0.577156, -0.25, 0, 0.25, 0, 0, -0.13, 0.263678, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ColorRect:material:shader_param/offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.06, 6.27345, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+
+[node name="GameplayPage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource( 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="rockets_root" type="Node2D" parent="."]
+
+[node name="PopupMsg" type="Popup" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="PopupMsg"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -150.0
+margin_right = 200.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 400, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PopupMsg/CenterContainer"]
+margin_right = 400.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 400, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupMsg/CenterContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PopupMsg/CenterContainer/Panel/MarginContainer"]
+margin_right = 320.0
+margin_bottom = 220.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Here we write magic text"
+autowrap = true
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_ui" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -240.0
+margin_right = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="powerbar" type="ProgressBar" parent="player_ui"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -25.0
+margin_right = 230.0
+margin_bottom = -11.0
+rect_min_size = Vector2( 210, 14 )
+rect_rotation = -90.0
+max_value = 1000.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="player_ui"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = -55.0
+margin_right = 186.0
+margin_bottom = -23.0
+custom_fonts/font = ExtResource( 3 )
+text = "KODKUCE"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="player_ui"]
+margin_left = 60.0
+margin_top = 165.0
+margin_right = 186.0
+margin_bottom = 197.0
+text = "COMMANDER "
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="player_ui"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 45.3746
+margin_top = -135.375
+margin_right = 99.3746
+margin_bottom = -116.375
+text = "- SCM"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="player_ui"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 45.0
+margin_top = -235.0
+margin_right = 99.0
+margin_bottom = -216.0
+text = "- MML"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="enemy_ui" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -124.0
+margin_right = 194.0
+margin_bottom = 240.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="powerbar" type="ProgressBar" parent="enemy_ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -38.0
+margin_top = 235.0
+margin_right = 172.0
+margin_bottom = 249.0
+rect_min_size = Vector2( 210, 14 )
+rect_rotation = -90.0
+max_value = 1000.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="enemy_ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -170.0
+margin_top = 45.0
+margin_right = -62.0
+margin_bottom = 77.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 3 )
+text = "MILENA"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="enemy_ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -188.0
+margin_top = 25.0
+margin_right = -62.0
+margin_bottom = 44.0
+text = "COMMANDER "
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="enemy_ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -103.0
+margin_top = 125.0
+margin_right = -49.0
+margin_bottom = 144.0
+text = "SCM -"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="enemy_ui"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -103.0
+margin_top = 215.0
+margin_right = -49.0
+margin_bottom = 234.0
+text = "MML -"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="player_input_ui" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -368.0
+margin_top = -89.0
+rect_rotation = -45.0
+rect_pivot_offset = Vector2( 368, 89 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="player_input_ui"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -20.0
+margin_bottom = -30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="inputtxt" type="Label" parent="player_input_ui/MarginContainer"]
+margin_top = 20.0
+margin_right = 348.0
+margin_bottom = 39.0
+text = "TYPE NEXT ROCKET CODE ..."
+
+[node name="score_ui" type="Control" parent="."]
+margin_right = 368.0
+margin_bottom = 89.0
+rect_rotation = 90.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="score_ui"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scoretxt" type="Label" parent="score_ui/MarginContainer"]
+margin_top = 3.0
+margin_right = 348.0
+margin_bottom = 66.0
+text = "ENEMY SCORE : 00000000
+YOUR SCORE : 00000000
+LANGUAGE : ENGLISH"
+
+[node name="start_animation" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/uiAnim = SubResource( 1 )
+
+[node name="TurtorialScreen" type="Node2D" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Rocket" type="Node2D" parent="TurtorialScreen"]
+position = Vector2( 336.343, 377.545 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RocketParticle" type="CPUParticles2D" parent="TurtorialScreen/Rocket"]
+scale = Vector2( 0.5, 0.5 )
+preprocess = 1.0
+speed_scale = 0.5
+gravity = Vector2( 0, -98 )
+scale_amount = 12.0
+scale_amount_curve = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="TurtorialScreen/Rocket"]
+rotation = 6.28319
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="TurtorialScreen/Rocket"]
+margin_left = 9.483
+margin_top = -8.0
+margin_right = 111.483
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 3 )
+text = "INCOMING"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DriveAnim" type="AnimationPlayer" parent="TurtorialScreen/Rocket"]
+autoplay = "rotate"
+playback_speed = 0.25
+anims/rotate = SubResource( 4 )
+
+[node name="Label3" type="Label" parent="TurtorialScreen/Rocket"]
+margin_left = -7.58405
+margin_top = 12.0156
+margin_right = 255.416
+margin_bottom = 31.0156
+text = "rockets fired by enemy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rocket2" type="Node2D" parent="TurtorialScreen"]
+modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
+position = Vector2( 600.616, 335.12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RocketParticle" type="CPUParticles2D" parent="TurtorialScreen/Rocket2"]
+scale = Vector2( 0.5, 0.5 )
+preprocess = 1.0
+speed_scale = 0.5
+scale_amount = 12.0
+scale_amount_curve = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="TurtorialScreen/Rocket2"]
+rotation = 6.28319
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="TurtorialScreen/Rocket2"]
+margin_left = 9.0
+margin_top = -8.0
+margin_right = 111.0
+margin_bottom = 11.0
+custom_fonts/font = SubResource( 3 )
+text = "OUTGOING"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DriveAnim" type="AnimationPlayer" parent="TurtorialScreen/Rocket2"]
+autoplay = "rotate"
+playback_speed = 0.25
+anims/rotate = SubResource( 5 )
+
+[node name="Label2" type="Label" parent="TurtorialScreen/Rocket2"]
+margin_left = -11.0615
+margin_top = -31.8508
+margin_right = 229.938
+margin_bottom = -12.8508
+text = "rockets fired by you"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="TurtorialScreen"]
+margin_left = 60.769
+margin_top = 404.918
+margin_right = 191.769
+margin_bottom = 445.918
+text = "powerup bar
+keys 1 and 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="TurtorialScreen"]
+modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
+margin_left = 639.691
+margin_top = 458.462
+margin_right = 903.691
+margin_bottom = 499.462
+text = "terminal bar so you can 
+see what you are typing"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label7" type="Label" parent="TurtorialScreen"]
+margin_left = 362.609
+margin_top = 520.877
+margin_right = 425.609
+margin_bottom = 539.877
+text = "you >"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label8" type="Label" parent="TurtorialScreen"]
+margin_left = 608.947
+margin_top = 67.9552
+margin_right = 739.947
+margin_bottom = 86.9552
+text = "< evil enemy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="TurtorialScreen"]
+margin_left = 499.868
+margin_top = 166.028
+margin_right = 763.868
+margin_bottom = 251.028
+text = "GAMEPLAY:
+shoot enemy rockets
+by typing their code
+and pressing enter."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label9" type="Label" parent="TurtorialScreen"]
+modulate = Color( 0.396078, 0.396078, 0.396078, 1 )
+margin_left = 118.654
+margin_top = 173.988
+margin_right = 393.654
+margin_bottom = 280.988
+text = "CHAT:
+evrything you type
+while holding shift will 
+be outputed as chat
+on shift realise. "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="players_root" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bot_spaceship" type="Sprite" parent="players_root"]
+position = Vector2( 512, 540 )
+texture = ExtResource( 2 )
+
+[node name="top_spaceship" type="Sprite" parent="players_root"]
+position = Vector2( 512, -100 )
+rotation = 3.14159
+texture = ExtResource( 2 )
+
+[node name="come" type="AnimationPlayer" parent="players_root"]
+playback_speed = 1.5
+anims/top_flyin = SubResource( 6 )
+
+[node name="ExplosionParticle" type="CPUParticles2D" parent="."]
+position = Vector2( 464.115, 75.7282 )
+emitting = false
+amount = 50
+lifetime = 7.5
+speed_scale = 1.1
+explosiveness = 0.2
+randomness = 0.5
+lifetime_randomness = 0.28
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2( 0, 0 )
+spread = 139.84
+gravity = Vector2( 0, 0 )
+initial_velocity = 30.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.05
+linear_accel = 10.0
+linear_accel_random = 1.0
+damping = 10.0
+damping_random = 1.0
+scale_amount = 10.0
+scale_amount_random = 0.5
+color_ramp = SubResource( 7 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exp_shader_animation" type="AnimationPlayer" parent="CanvasLayer"]
+anims/exp_shader = SubResource( 9 )
+[connection signal="popup_hide" from="PopupMsg" to="." method="_on_PopupMsg_popup_hide"]
